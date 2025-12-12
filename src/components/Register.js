@@ -8,9 +8,12 @@ import { config } from "../App";
 import Footer from "./Footer";
 import Header from "./Header";
 import "./Register.css";
+import {Link} from "react-router-dom"
+import { useHistory} from "react-router-dom";
 
 const Register = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
   const [form,setForm] = useState({
     username:"",
     password:"",
@@ -67,6 +70,7 @@ const Register = () => {
     );
     if(response.status==201 || response.data.success){
       enqueueSnackbar("Registered Successfully",{variant: "success"})
+      history.push("/login");
     }
   }
   catch(err){
@@ -175,9 +179,10 @@ const Register = () => {
            </Button>
           <p className="secondary-action">
             Already have an account?{" "}
-             <a className="link" href="#">
-              Login here
-             </a>
+            <Link className="link" to="/login">
+                Login here
+            </Link>
+
           </p>
         </Stack>
       </Box>
